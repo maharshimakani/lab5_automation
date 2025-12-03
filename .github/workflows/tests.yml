@@ -1,5 +1,4 @@
-
-name: Lint Code
+name: Run Unit Tests
 
 on:
   push:
@@ -8,11 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  lint:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -20,10 +19,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install flake8
+      - name: Install dependencies
         run: |
-          pip install flake8
+          pip install -r requirements.txt
+          pip install pytest
 
-      - name: Run flake8
+      - name: Run pytest
         run: |
-          flake8 .
+          pytest -q
