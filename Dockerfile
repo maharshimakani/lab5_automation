@@ -1,11 +1,17 @@
-FROM python:3.9
+FROM python:3.12-slim
 
-RUN mkdir /opt/hello_world/
-WORKDIR /opt/hello_world/
+# Set working directory inside the container
+WORKDIR /opt/hello_world
 
+# Install Python dependencies
 COPY requirements.txt .
-COPY dist/hello_world /opt/hello_world/
+RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 80
+# Copy the application code
+COPY . .
 
-CMD [ "./hello_world" ]
+# The Flask app in hello_world.py runs on port 4049
+EXPOSE 4049
+
+# Start the Flask app
+CMD ["python", "hello_world.py"]
