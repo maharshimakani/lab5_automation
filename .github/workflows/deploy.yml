@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: yourdockerhubusername/lab5-flask-ci
+  IMAGE_NAME: maharshimakani/lab5-flask-ci
 
 jobs:
   build-and-push:
